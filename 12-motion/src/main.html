@@ -4,77 +4,150 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MOTION 👻</title>
+    <title>MOTION</title>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="../build/content.js"></script>
     <script src="../build/main.js"></script>
-    <style></style>
-    <link rel="stylesheet" href="style.css" />
+    <script src="../build/dialog.js"></script>
+    <script src="../build/section.js"></script>
+    <link rel="stylesheet" href="style/variable.css" />
+    <link rel="stylesheet" href="style/default.css" />
+    <link rel="stylesheet" href="style/section.css" />
+    <link rel="stylesheet" href="style/dialog.css" />
+    <link rel="stylesheet" href="style/header.css" />
+    <link rel="stylesheet" href="style/footer.css" />
+    <link rel="shortcut icon" href="img/favicon.png" />
   </head>
   <body>
     <header>
       <h1>MOTION</h1>
       <ul>
-        <li><button>image</button></li>
-        <li><button>video</button></li>
-        <li><button>note</button></li>
-        <li><button>todo</button></li>
+        <li><button onclick="openDialog('image')">image</button></li>
+        <li><button onclick="openDialog('video')">video</button></li>
+        <li><button onclick="openDialog('note')">note</button></li>
+        <li><button onclick="openDialog('todo')">to-do</button></li>
       </ul>
     </header>
     <document>
-      <section class="video-section">
-        <div>
+      <section class="video_section">
+        <div class="thumbnail_div">
           <iframe
+            width="300"
             height="200"
-            src="https://www.youtube.com/embed/SlVFLagUs6Y"
+            src="https://www.youtube.com/embed/GP1XYuTMbqc"
             title="YouTube video player"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
           ></iframe>
         </div>
-        <div>
-          <p> youtube music title </p>
+        <div class="text_div">
+          <p>youtube music example</p>
+        </div>
+        <div class="modify_div">
+          <span onclick="openModifyDialog()">▶</span>
         </div>
       </section>
-      <section class="video-section">
-        <iframe
-          height="200"
-          src="https://www.youtube.com/embed/kwJ6z8-3v-Q"
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
-        <div>
-          <p> youtube music title2 </p>
-        </div>
-      </section>
-      <section class="image-section">
-        <div>
+      <section class="image_section">
+        <div class="thumbnail_div">
           <img
-            src="https://i.picsum.photos/id/94/600/500.jpg?hmac=cdKwuYdpmYLtI6z-F5DZ1oF9OwWP1xV51LCWSxquDKw"
+            src="https://images.unsplash.com/photo-1618118850468-71176468ef6b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=342&q=80"
+            onclick="window.open('https://images.unsplash.com/photo-1618118850468-71176468ef6b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=342&q=80')"
           />
         </div>
-        <div>
-          <p> image title </p>
+        <div class="text_div">
+          <p>image example</p>
+        </div>
+        <div class="modify_div">
+          <span onclick="openModifyDialog()">▶</span>
         </div>
       </section>
-      <section class="note-section">
-        <div>
+      <section class="note_section">
+        <div class="text_div">
           <h3>note</h3>
-          <p>note content...</p>
+          <p>note example</p>
+        </div>
+        <div class="modify_div">
+          <span onclick="openModifyDialog()">▶</span>
         </div>
       </section>
-      <section class="todo-section">
-        <div>
+      <section class="todo_section">
+        <div class="text_div">
           <h3>to-do</h3>
           <p>
             <input type="checkbox" name="todo" id="todo1" />
-            note content...
+            <label for="todo1">to-do example</label>
           </p>
+        </div>
+        <div class="modify_div">
+          <span onclick="openModifyDialog()">▶</span>
         </div>
       </section>
     </document>
-    <footer>Copyright © 2020 jinjoo. All rights reserved.</footer>
-    <dialog></dialog>
+    <dialog id="image_dialog" class="image_dialog">
+      <div class="dialog_title_div">
+        <h3>image dialog</h3>
+        <button onclick="closeAllDialogs()">x</button>
+      </div>
+      <p>
+        <input type="text" id="image_url_input" placeholder="image url" />
+        <textarea
+          id="image_description_textarea"
+          placeholder="description"
+        ></textarea>
+      </p>
+      <button onclick="clickSaveButton('image')" class="save_button">
+        save
+      </button>
+    </dialog>
+    <dialog id="video_dialog" class="video_dialog">
+      <div class="dialog_title_div">
+        <h3>video dialog</h3>
+        <button onclick="closeAllDialogs()">x</button>
+      </div>
+      <p>
+        <input type="text" id="video_url_input" placeholder="youtube url" />
+        <textarea
+          id="video_description_textarea"
+          placeholder="description"
+        ></textarea>
+      </p>
+      <button onclick="clickSaveButton('video')" class="save_button">
+        save
+      </button>
+    </dialog>
+    <dialog id="note_dialog" class="note_dialog">
+      <div class="dialog_title_div">
+        <h3>note dialog</h3>
+        <button onclick="closeAllDialogs()">x</button>
+      </div>
+      <p>
+        <input type="text" id="note_title_input" placeholder="title" />
+        <textarea
+          id="note_description_textarea"
+          placeholder="description"
+        ></textarea>
+      </p>
+      <button onclick="clickSaveButton('note')" class="save_button">
+        save
+      </button>
+    </dialog>
+    <dialog id="todo_dialog" class="todo_dialog">
+      <div class="dialog_title_div">
+        <h3>to-do dialog</h3>
+        <button onclick="closeAllDialogs()">x</button>
+      </div>
+      <p>
+        <input type="text" id="todo_title_input" placeholder="title" />
+        <textarea
+          id="todo_textarea"
+          placeholder="to-do list.&#13;&#10;줄바꿈으로 구분됩니다."
+        ></textarea>
+      </p>
+      <button onclick="clickSaveButton('todo')" class="save_button">
+        save
+      </button>
+    </dialog>
+    <footer>Copyright © 2021 .... All rights reserved.</footer>
   </body>
 </html>
